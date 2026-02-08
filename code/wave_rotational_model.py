@@ -91,23 +91,51 @@ class EarthMoonSystem:
         
         return mu * np.sqrt(self.const.G * M_total * a * (1 - e**2))
     
-    def tidal_torque(self, a: float) -> float:
+    def tidal_torque(self, a: float, omega_rot: float = None) -> float:
         """
-        Calculate classical tidal torque on Earth.
+        Calculate classical tidal torque on Earth from the Moon.
+        
+        This uses an empirically calibrated formula to match the observed
+        lunar recession rate of ~3.8 cm/year at the current Earth-Moon distance.
+        
+        When Earth rotates faster than Moon orbits (ω_rot > ω_orb), the tidal
+        bulge leads the Earth-Moon line, transferring angular momentum from
+        Earth's rotation to Moon's orbit.
         
         Parameters
         ----------
         a : float
             Semi-major axis [m]
+        omega_rot : float, optional
+            Earth's rotation rate [rad/s]. If None, uses current value.
             
         Returns
         -------
         float
-            Tidal torque [N m]
+            Tidal torque magnitude [N m]
+            Positive means angular momentum transfer from Earth rotation to Moon orbit
         """
-        torque = (3/2) * self.const.K2_EARTH * \
-                 (self.const.G * self.const.M_MOON**2 * self.const.R_EARTH**5) / \
-                 (a**6) * np.sin(2 * self.const.TIDAL_LAG)
+        if omega_rot is None:
+            omega_rot = 2 * np.pi / self.const.EARTH_ROTATION_PERIOD
+        
+        omega_orb = np.sqrt(self.const.G * (self.const.M_EARTH + self.const.M_MOON) / a**3)
+        
+        # Use empirical calibration to match observed 3.8 cm/year
+        # Required torque at current distance: ~1.2e11 N⋅m
+        
+        # Reference values at current configuration
+        a_ref = self.const.SEMI_MAJOR_AXIS
+        
+        # Tidal torque scales as a^(-6) for constant Q
+        # Calibrated to give 3.8 cm/year recession at current distance
+        torque_ref = 1.192e11  # N⋅m, empirically calibrated
+        
+        torque = torque_ref * (a_ref / a)**6
+        
+        # Only applies when Earth rotates faster than Moon orbits
+        if omega_rot <= omega_orb:
+            torque = 0.0
+        
         return torque
     
     def wave_torque(self, L_orb: float, L_rot: float, t: float) -> float:
@@ -154,15 +182,20 @@ class EarthMoonSystem:
         """
         L_orb, L_rot, a = state
         
+        # Current rotation rate
+        omega_rot = L_rot / self.const.I_EARTH
+        
         # Classical tidal torque
-        gamma_tidal = self.tidal_torque(a)
+        # Positive torque means angular momentum transfer FROM Earth rotation TO Moon orbit
+        gamma_tidal = self.tidal_torque(a, omega_rot)
         
         # Wave torque
         gamma_wave = self.wave_torque(L_orb, L_rot, t)
         
         # Angular momentum evolution
-        dL_orb_dt = -gamma_tidal + gamma_wave
-        dL_rot_dt = gamma_tidal - gamma_wave
+        # Tidal torque removes angular momentum from Earth rotation and adds it to orbit
+        dL_orb_dt = gamma_tidal - gamma_wave  # Orbit gains from tidal, loses to wave
+        dL_rot_dt = -gamma_tidal + gamma_wave  # Rotation loses to tidal, gains from wave
         
         # Semi-major axis evolution (assuming circular orbit, e≈0)
         mu = (self.const.M_EARTH * self.const.M_MOON) / \
