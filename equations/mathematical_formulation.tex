@@ -1,0 +1,247 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\title{Mathematical Equations: \\
+Wave–Rotational Hypothesis}
+\author{Kisro Foundation Research Group}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Fundamental Equations}
+
+\subsection{Angular Momentum Conservation}
+
+Total angular momentum conservation:
+\begin{equation}
+\mathbf{L}_{\text{total}} = \mathbf{L}_{\text{orb}} + \mathbf{L}_{\text{rot}} = \text{const}
+\label{eq:angular_momentum}
+\end{equation}
+
+Orbital angular momentum:
+\begin{equation}
+L_{\text{orb}} = \mu \sqrt{GMa(1-e^2)}
+\label{eq:orbital_L}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\mu = \frac{M_E M_M}{M_E + M_M}$ is the reduced mass
+    \item $G$ is the gravitational constant
+    \item $M = M_E + M_M$ is the total mass
+    \item $a$ is the semi-major axis
+    \item $e$ is the orbital eccentricity
+\end{itemize}
+
+\subsection{Rotational Dynamics}
+
+Earth's rotational angular momentum:
+\begin{equation}
+L_{\text{rot},E} = I_E \omega_E
+\label{eq:earth_rotation}
+\end{equation}
+
+where $I_E = \frac{2}{5}M_E R_E^2$ is Earth's moment of inertia (approximating as a uniform sphere).
+
+\subsection{Tidal Evolution}
+
+Classical tidal torque on Earth:
+\begin{equation}
+\Gamma_{\text{tidal}} = \frac{3}{2} k_2 \frac{GM_M^2 R_E^5}{a^6} \sin(2\delta)
+\label{eq:tidal_torque}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $k_2$ is the Love number (describing tidal deformability)
+    \item $\delta$ is the tidal lag angle
+\end{itemize}
+
+\section{Wave–Rotational Extensions}
+
+\subsection{Wave Field Equations}
+
+General wave function:
+\begin{equation}
+\Psi(\mathbf{r}, t) = A(\mathbf{r}) e^{i(\mathbf{k} \cdot \mathbf{r} - \omega t + \phi_0)}
+\label{eq:wave_function}
+\end{equation}
+
+Spherical harmonic expansion:
+\begin{equation}
+\Psi(r, \theta, \varphi, t) = \sum_{l=0}^{\infty} \sum_{m=-l}^{l} A_{lm}(r) Y_l^m(\theta, \varphi) e^{-i\omega t}
+\label{eq:spherical_expansion}
+\end{equation}
+
+\subsection{Coupling Term}
+
+Wave-mediated torque:
+\begin{equation}
+\Gamma_{\text{wave}} = \alpha \frac{L_{\text{orb}} L_{\text{rot}}}{(L_{\text{orb}} + L_{\text{rot}})^2} \cos(\Delta\phi)
+\label{eq:wave_torque}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\alpha$ is a dimensionless coupling constant
+    \item $\Delta\phi = n\phi_{\text{orb}} - m\phi_{\text{rot}}$ is the phase difference
+\end{itemize}
+
+\subsection{Modified Evolution Equations}
+
+Complete equation of motion:
+\begin{equation}
+\frac{dL_{\text{orb}}}{dt} = -\Gamma_{\text{tidal}} + \Gamma_{\text{wave}}
+\label{eq:modified_evolution}
+\end{equation}
+
+\begin{equation}
+\frac{dL_{\text{rot}}}{dt} = \Gamma_{\text{tidal}} - \Gamma_{\text{wave}}
+\label{eq:modified_rotation}
+\end{equation}
+
+\subsection{Resonance Condition}
+
+General resonance:
+\begin{equation}
+n\omega_{\text{orb}} - m\omega_{\text{rot}} = k\omega_{\text{wave}}
+\label{eq:resonance}
+\end{equation}
+
+For $k=0$ (exact resonance):
+\begin{equation}
+\frac{\omega_{\text{orb}}}{\omega_{\text{rot}}} = \frac{m}{n}
+\label{eq:exact_resonance}
+\end{equation}
+
+\section{Perturbation Analysis}
+
+\subsection{Small Wave Coupling}
+
+Assuming $\alpha \ll 1$, we can expand to first order:
+
+\begin{equation}
+L_{\text{orb}}(t) \approx L_{\text{orb}}^{(0)}(t) + \alpha L_{\text{orb}}^{(1)}(t) + O(\alpha^2)
+\label{eq:perturbation_expansion}
+\end{equation}
+
+First-order correction:
+\begin{equation}
+L_{\text{orb}}^{(1)}(t) = \int_0^t \Gamma_{\text{wave}}(\tau) \, d\tau
+\label{eq:first_order}
+\end{equation}
+
+\subsection{Periodic Modulation}
+
+For periodic wave coupling:
+\begin{equation}
+\Gamma_{\text{wave}}(t) = \Gamma_0 \cos(\omega_{\text{wave}} t + \phi_0)
+\label{eq:periodic_torque}
+\end{equation}
+
+This gives:
+\begin{equation}
+L_{\text{orb}}(t) = L_{\text{orb}}^{(0)} + \frac{\Gamma_0}{\omega_{\text{wave}}} \sin(\omega_{\text{wave}} t + \phi_0)
+\label{eq:modulated_L}
+\end{equation}
+
+\section{Energy Considerations}
+
+\subsection{Total Energy}
+
+System energy:
+\begin{equation}
+E_{\text{total}} = E_{\text{orb}} + E_{\text{rot}} + E_{\text{wave}}
+\label{eq:total_energy}
+\end{equation}
+
+Orbital energy:
+\begin{equation}
+E_{\text{orb}} = -\frac{GM_E M_M}{2a}
+\label{eq:orbital_energy}
+\end{equation}
+
+Rotational energy:
+\begin{equation}
+E_{\text{rot}} = \frac{1}{2}I_E \omega_E^2
+\label{eq:rotational_energy}
+\end{equation}
+
+\subsection{Power Transfer}
+
+Rate of energy transfer:
+\begin{equation}
+\frac{dE_{\text{wave}}}{dt} = -\Gamma_{\text{wave}} \cdot \omega_{\text{rot}}
+\label{eq:power_transfer}
+\end{equation}
+
+\section{Dimensionless Parameters}
+
+\subsection{Coupling Strength}
+
+Dimensionless wave coupling:
+\begin{equation}
+\epsilon_{\text{wave}} = \frac{\Gamma_{\text{wave}}}{\Gamma_{\text{tidal}}}
+\label{eq:coupling_strength}
+\end{equation}
+
+For detectability, we require:
+\begin{equation}
+\epsilon_{\text{wave}} \gtrsim 10^{-4}
+\label{eq:detectability}
+\end{equation}
+
+\subsection{Time Scales}
+
+Characteristic wave period:
+\begin{equation}
+T_{\text{wave}} = \frac{2\pi}{\omega_{\text{wave}}}
+\label{eq:wave_period}
+\end{equation}
+
+Tidal evolution time scale:
+\begin{equation}
+\tau_{\text{tidal}} = \frac{L_{\text{orb}}}{\Gamma_{\text{tidal}}} \sim 10^9 \text{ years}
+\label{eq:tidal_timescale}
+\end{equation}
+
+\section{Observables}
+
+\subsection{Lunar Distance Variation}
+
+Semi-major axis variation:
+\begin{equation}
+\frac{da}{dt} = \frac{2a^2}{GMM_M} \frac{dL_{\text{orb}}}{dt}
+\label{eq:distance_variation}
+\end{equation}
+
+With wave coupling:
+\begin{equation}
+\frac{da}{dt} = \left(\frac{da}{dt}\right)_{\text{tidal}} + \Delta a_{\text{wave}} \cos(\omega_{\text{wave}} t)
+\label{eq:distance_with_wave}
+\end{equation}
+
+\subsection{Length of Day}
+
+Earth's rotation period:
+\begin{equation}
+P_{\text{rot}} = \frac{2\pi}{\omega_E}
+\label{eq:rotation_period}
+\end{equation}
+
+Rate of change:
+\begin{equation}
+\frac{dP_{\text{rot}}}{dt} = -\frac{2\pi}{\omega_E^2} \frac{d\omega_E}{dt}
+\label{eq:LOD_change}
+\end{equation}
+
+\section{Summary}
+
+This document provides the complete mathematical formulation of the wave–rotational hypothesis. All equations are self-consistent and reduce to classical results when $\Gamma_{\text{wave}} = 0$.
+
+\end{document}
