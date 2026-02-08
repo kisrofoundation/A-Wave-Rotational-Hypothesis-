@@ -193,7 +193,9 @@ class EarthMoonSystem:
         gamma_wave = self.wave_torque(L_orb, L_rot, t)
         
         # Angular momentum evolution
-        # Tidal torque removes angular momentum from Earth rotation and adds it to orbit
+        # Sign convention: gamma_tidal > 0 means transfer FROM Earth rotation TO Moon orbit
+        # Therefore: orbit gains (+gamma_tidal), rotation loses (-gamma_tidal)
+        # Wave coupling modifies this: if gamma_wave > 0, it transfers FROM orbit TO rotation
         dL_orb_dt = gamma_tidal - gamma_wave  # Orbit gains from tidal, loses to wave
         dL_rot_dt = -gamma_tidal + gamma_wave  # Rotation loses to tidal, gains from wave
         
