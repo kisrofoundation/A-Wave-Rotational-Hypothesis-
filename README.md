@@ -1,1 +1,1 @@
-# A-Wave-Rotational-Hypothesis 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18640477.svg)](https://doi.org/10.5281/zenodo.18640477)
