@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "A conceptual and mathematical exploration of wave–rotational interactions as a possible extension to classical Earth–Moon dynamics"
+message: "If you use this work, please cite it as below."
+type: software
+authors:
+  - family-names: Lalgi
+    given-names: Dineshkumar
+year: 2026
+doi: 10.5281/zenodo.18640477
+url: https://doi.org/10.5281/zenodo.18640477
+repository-code: https://github.com/kisrofoundation/REPOSITORY-A-Wave-Rotational-Hypothesis
+license: MIT
